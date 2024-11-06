@@ -26,13 +26,13 @@ def draw_objects(draw, objs, labels):
 
 def input_size(session):
   """Returns input image size as (width, height) tuple."""
-  _, height, width, _ = session.input(0).shape
+  _, height, width, _ = session.model.input(0).shape
   return height, width
 
 
 def input_tensor(session):
   """Returns input tensor view as numpy array of shape (height, width, 3)."""
-  return session.input(0)
+  return session.model.input(0)
 
 
 def resize_image(session, size, resize):
@@ -57,7 +57,7 @@ def resize_image(session, size, resize):
 
 def output_tensor(outputs, i):
   """Returns output tensor view."""
-  tensor = outputs[i].numpy()
+  tensor = outputs[i]
   return np.squeeze(tensor)
 
 
@@ -148,7 +148,7 @@ def get_output(session, outputs, score_threshold, image_scale=(1.0, 1.0)):
   scores = output_tensor(outputs, 2)
   count = int(output_tensor(outputs, 3))
 
-  _, height, width, _ = session.input(0).shape
+  _, height, width, _ = session.model.input(0).shape
   image_scale_x, image_scale_y = image_scale
   sx, sy = width / image_scale_x, height / image_scale_y
 

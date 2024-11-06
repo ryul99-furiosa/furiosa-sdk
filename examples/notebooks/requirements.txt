@@ -2,6 +2,6 @@
 ../../python/furiosa-sdk/
 ipython < 8.13
 matplotlib
-mnist
+python-mnist
 onnxruntime ~= 1.15.1
 pillow ~= 9.5.0
